@@ -11,82 +11,39 @@ import java.util.List;
 import java.util.Scanner;
 
 import static com.javarush.cryptoanalyzer.polyakova.constant.CryptoAlphabet.ALPHABET_COMMON;
+import static com.javarush.cryptoanalyzer.polyakova.constant.InformationForUser.*;
 
 public class Encode implements Function {
     @Override
     public Result execute(String[] parameters) {
-        List<Character> characterList = new ArrayList<Character>();
-        // Сделать отдельный класс с методами для ввода адреса файла
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            System.out.println("Введите адрес файла, который нужно зашифровать, либо нажмите ENTER для тестового запуска программы:");
-            parameters[0] = scanner.nextLine();
-            if (parameters[0].equalsIgnoreCase("")) {
-                parameters[0] = "C:\\Users\\-sSs-\\IdeaProjects\\InputTest.txt";
-            }
-            PathValidator pathValidator = new PathValidator();
-            if (pathValidator.pathValidator(parameters[0])) {
-                //дать лист куда записываем данные чтоб не перезаписывать!
-                InputData inputData = new InputData();
-                inputData.readFile(parameters[0], characterList);
-                break;
-            }
-            else System.out.println("Некорректный адрес, попробуйте снова!");}
-        String dest;
-        while (true) {
-            System.out.println("Введите адрес файла, в который сохранить зашифрованный текст, либо нажмите ENTER для тестового запуска программы:");
-            parameters[0] = scanner.nextLine();
-             dest=parameters[0];
-            if (dest.equalsIgnoreCase("")) {
-                dest = "C:\\Users\\-sSs-\\IdeaProjects\\OutputTest.txt";
-            }
-            PathValidator pathValidator = new PathValidator();
-            if (pathValidator.pathValidator(dest)) {
-                break;
-            }
-            else System.out.println("Некорректный адрес, попробуйте снова!");}
+        List<Character> inputCharacterList = new ArrayList<Character>();
 
-        int ceasarKey;
-        while (true) {
-            System.out.println("Введите ключ Цезаря, либо нажмите ENTER для тестового запуска программы:");
-            parameters[0] = scanner.nextLine();
-            String key = parameters[0];
-            if (key.equalsIgnoreCase("")) {
-                key = "10";
-            }
-            String regex = "[0-9]+";
-            if (key.matches(regex)){
-            ceasarKey= Integer.parseInt(key)%(ALPHABET_COMMON.length);
-            break;}
-            else System.out.println("Ключ должен состоять только из числа, попробуйте снова!");
-        }
-//          TODO finish encode execute method кодировки код вернуть результат ок или эррор
+        InputData inputData = new InputData();
+
+        inputData.ReadingInputFile(INPUT_FILE_PATH_ENCODE,INPUT_TEST_FILE_PATH_ENCODE, inputCharacterList);
+
+        String dest = inputData.ReadingOutputFile(OUTPUT_FILE_PATH_ENCODE,OUTPUT_TEST_FILE_PATH_ENCODE);
+
+        int ceasarKey = inputData.ReadingCeasarCode(INPUT_VALUE_OF_CEASAR_CODE, TEST_CEASAR_CODE);
+
        try (FileWriter writer = new FileWriter(dest)) {
-           List<Integer> numb = new ArrayList<Integer>();
-           List<Character> copyList = new ArrayList<Character>();
-           for (Character c : characterList) {
+           List<Integer> charsPosition = new ArrayList<Integer>();
+           List<Character> outputCharacterList = new ArrayList<Character>();
+           for (Character c : inputCharacterList) {
                for (int i = 0; i < ALPHABET_COMMON.length; i++) {
                    if (c.compareTo(ALPHABET_COMMON[i])==0){
-                       numb.add(i);
+                       charsPosition.add(i);
                    }
                }
            }
-           for (Integer n : numb) {
-               copyList.add(ALPHABET_COMMON[(n+ceasarKey)%ALPHABET_COMMON.length]);
+           for (Integer i : charsPosition) {
+               outputCharacterList.add(ALPHABET_COMMON[(i+ceasarKey)%ALPHABET_COMMON.length]);
            }
-
-           {
-               char[] buffer = new char[65536]; // 128Kb
-               for (Character c : copyList) {
+           for (Character c : outputCharacterList) {
                    writer.write(c);
                }
-
-           }
-
-
-       }
-        catch (Exception e){
-           return new Result(ResultCode.ERROR,new ApplicationException("Decode operation finish with exception", e));
+       } catch (Exception e){
+           return new Result(ResultCode.ERROR,new ApplicationException("Encode operation finish with exception", e));
         }
         return new Result(ResultCode.OK);
     }
