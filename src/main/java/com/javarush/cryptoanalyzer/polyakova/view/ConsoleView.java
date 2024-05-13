@@ -10,14 +10,23 @@ import static com.javarush.cryptoanalyzer.polyakova.constant.ApplicationCompleti
 
 public class ConsoleView implements View {
     Scanner scanner = new Scanner(System.in);
-    String[] parameters = new String[2];
+    String[] parameters = new String[1];
 
     @Override
     public String[] getParameters() {
-//        TODO logic work with console, finish method
-        System.out.println("Введите:\n 1 для кодировки, \n 2 для декодировки, \n 3 для решения через Brute force");
-        parameters[1]=scanner.nextLine();
-        return new String[]{parameters[1]};
+        String[] parameters = new String[5];
+        while (true){
+        System.out.println("Введите:\n 1 - для кодировки, \n 2 - для декодировки, \n 3 - для решения через Brute force");
+            parameters[0]=scanner.nextLine();
+        if (parameters[0].equalsIgnoreCase("1")
+                ||parameters[0].equalsIgnoreCase("2")
+                    ||parameters[0].equalsIgnoreCase("3"))
+        {
+            break;
+        }
+        else System.out.println("Введи число согласно условию!");
+        }
+        return new String[]{parameters[0]};
     }
 
     @Override

@@ -4,7 +4,6 @@ import com.javarush.cryptoanalyzer.polyakova.entity.Result;
 
 public interface View {
 
-
     String[] getParameters();
     void printResults(Result result);
 }
