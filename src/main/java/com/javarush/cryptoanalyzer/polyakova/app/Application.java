@@ -27,7 +27,7 @@ public class Application {
             case "2" -> FunctionCode.valueOf(DECODE).getFunction();
             default -> FunctionCode.valueOf(UNSUPPORTED_FUNCTION).getFunction();
 
-        }
+        };
     }
     public void printResult(Result result){
         mainController.getView().printResults(result);

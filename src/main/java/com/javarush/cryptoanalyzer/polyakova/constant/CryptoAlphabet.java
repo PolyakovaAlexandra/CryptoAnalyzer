@@ -13,12 +13,12 @@ public class CryptoAlphabet {
         private static final char[] ALPHABET=new char[ALPHABET_LOWER_CASE.length+ALPHABET_UPPER_CASE.length+
                 DIGITS.length+SYMBOLS.length];
 
-        public static void main(String[] args) {
+       /* public static void main(String[] args) {
                 System.arraycopy(ALPHABET_LOWER_CASE,0,ALPHABET,ALPHABET_LOWER_CASE.length);
                 System.arraycopy(ALPHABET_UPPER_CASE,ALPHABET_LOWER_CASE.length,ALPHABET,ALPHABET_UPPER_CASE.length);
                 System.arraycopy(DIGITS,0,ALPHABET,ALPHABET_LOWER_CASE.length+ALPHABET_UPPER_CASE.length);
                 System.arraycopy(SYMBOLS,0,ALPHABET,ALPHABET_LOWER_CASE+ALPHABET_UPPER_CASE+DIGITS);
-        }
+        }*/
 
 
 }

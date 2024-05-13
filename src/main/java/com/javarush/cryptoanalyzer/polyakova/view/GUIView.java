@@ -6,10 +6,11 @@ import static com.javarush.cryptoanalyzer.polyakova.constant.ApplicationCompleti
 import static com.javarush.cryptoanalyzer.polyakova.constant.ApplicationCompletionConstants.SUCCESS;
 
 public class GUIView implements View {
+
     @Override
     public String[] getParameters() {
 //        TODO finish this method
-        return new String[0];
+        return new String[1];
     }
 
     @Override
