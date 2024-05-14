@@ -14,19 +14,19 @@ public class ConsoleView implements View {
 
     @Override
     public String[] getParameters() {
-        String[] parameters = new String[5];
+        String parameters;
         while (true){
         System.out.println("Введите:\n 1 - для кодировки, \n 2 - для декодировки, \n 3 - для решения через Brute force");
-            parameters[0]=scanner.nextLine();
-        if (parameters[0].equalsIgnoreCase("1")
-                ||parameters[0].equalsIgnoreCase("2")
-                    ||parameters[0].equalsIgnoreCase("3"))
+            parameters=scanner.nextLine();
+        if (parameters.equalsIgnoreCase("1")
+                ||parameters.equalsIgnoreCase("2")
+                    ||parameters.equalsIgnoreCase("3"))
         {
             break;
         }
         else System.out.println("Введи число согласно условию!");
         }
-        return new String[]{parameters[0]};
+        return new String[]{parameters};
     }
 
     @Override
