@@ -27,7 +27,8 @@ public class BruteForce implements Function {
         try (FileWriter writer = new FileWriter(dest)) {
             List<Integer> charsPosition = new ArrayList<Integer>();
             List<String> outputStringList = new ArrayList<String>();
-            String s=null;
+            String s="";
+
             for (Character c : inputCharacterList) {
                 for (int i = 0; i < ALPHABET_COMMON.length; i++) {
                     if (c.compareTo(ALPHABET_COMMON[i])==0){
@@ -41,7 +42,7 @@ public class BruteForce implements Function {
                      s+=String.valueOf(ALPHABET_COMMON[(position-i+ALPHABET_COMMON.length)%ALPHABET_COMMON.length]);
                 }
                 outputStringList.add(s);
-                s=null;
+                s="";
             }
 
             String regex ="((^[а-яёА-ЯЁ][^\\d])([а-яё]{0,12})\\s)(([а-яё][^\\d]*[\\s\\S][а-яё]{0,12})*$)";
@@ -49,6 +50,7 @@ public class BruteForce implements Function {
 
             for (String line : outputStringList) {
                 if (line.matches(regex)) {
+                    System.out.println(line);
                     writer.write(line);
                 }
             }

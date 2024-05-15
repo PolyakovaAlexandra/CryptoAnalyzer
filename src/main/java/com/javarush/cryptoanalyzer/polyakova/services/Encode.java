@@ -6,9 +6,8 @@ import com.javarush.cryptoanalyzer.polyakova.repository.ResultCode;
 
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Scanner;
+
 
 import static com.javarush.cryptoanalyzer.polyakova.constant.CryptoAlphabet.ALPHABET_COMMON;
 import static com.javarush.cryptoanalyzer.polyakova.constant.InformationForUser.*;
@@ -40,8 +39,8 @@ public class Encode implements Function {
                outputCharacterList.add(ALPHABET_COMMON[(i+ceasarKey)%ALPHABET_COMMON.length]);
            }
            for (Character c : outputCharacterList) {
-                   writer.write(c);
-               }
+               writer.write(c);
+           }
        } catch (Exception e){
            return new Result(ResultCode.ERROR,new ApplicationException("Encode operation finish with exception", e));
         }

@@ -7,7 +7,6 @@ import com.javarush.cryptoanalyzer.polyakova.repository.ResultCode;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import static com.javarush.cryptoanalyzer.polyakova.constant.CryptoAlphabet.ALPHABET_COMMON;
 import static com.javarush.cryptoanalyzer.polyakova.constant.InformationForUser.*;
@@ -30,6 +29,7 @@ public class Decode implements Function {
         try (FileWriter writer = new FileWriter(dest)) {
             List<Integer> charsPosition = new ArrayList<Integer>();
             List<Character> outputCharacterList = new ArrayList<Character>();
+
             for (Character c : inputCharacterList) {
                 for (int i = 0; i < ALPHABET_COMMON.length; i++) {
                     if (c.compareTo(ALPHABET_COMMON[i])==0){
@@ -37,12 +37,13 @@ public class Decode implements Function {
                     }
                 }
             }
+
             for (Integer n : charsPosition) {
                 outputCharacterList.add(ALPHABET_COMMON[(n-ceasarKey+ALPHABET_COMMON.length)%ALPHABET_COMMON.length]);
             }
-                for (Character c : outputCharacterList) {
-                    writer.write(c);
-                }
+            for (Character c : outputCharacterList) {
+                writer.write(c);
+            }
         }catch (Exception e){
             return new Result(ResultCode.ERROR,new ApplicationException("Decode operation finish with exception", e));
         }

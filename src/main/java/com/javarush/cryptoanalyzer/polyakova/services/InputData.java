@@ -6,13 +6,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import static com.javarush.cryptoanalyzer.polyakova.constant.CryptoAlphabet.ALPHABET_COMMON;
-import static com.javarush.cryptoanalyzer.polyakova.constant.InformationForUser.INPUT_FILE_PATH_ENCODE;
-import static com.javarush.cryptoanalyzer.polyakova.constant.InformationForUser.INPUT_TEST_FILE_PATH_ENCODE;
+
 
 
 public class InputData {
